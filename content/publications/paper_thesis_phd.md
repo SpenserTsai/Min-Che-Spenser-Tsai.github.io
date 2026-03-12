@@ -14,7 +14,7 @@ month = "Jan."
 year = 2026
 
 # 連結區塊 (通常只有 PDF)
-pdf = "/thesis/Phd_Dissertation.pdf"
+pdf = "thesis/Phd_Dissertation.pdf"
 
 [build]
 render = "never"
