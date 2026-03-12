@@ -1,0 +1,72 @@
+baseURL = "https://spensertsai.github.io/Min-Che-Spenser-Tsai.github.io/"
+title = "Spenser Website"
+theme = "PaperMod"
+languageCode = "en-us"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[pagination]
+pagerSize = 5
+
+[params]
+# 確保資源使用絕對路徑，避免在子網頁下抓不到 CSS
+canonifyURLs = true
+relativeURLs = false
+
+defaultTheme = "light"
+disableThemeToggle = true
+ShowReadingTime = false
+ShowShareButtons = false
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = false
+ShowWordCount = false
+ShowToc = false
+ShowPostNavLinks = false
+ShowRssButtonInSectionTermList = false
+mainSections = []
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 10
+
+[[menu.main]]
+identifier = "research"
+name = "Research"
+url = "/research/"
+weight = 20
+
+[[menu.main]]
+identifier = "publications"
+name = "Publications"
+url = "/publications/"
+weight = 30
+
+[[menu.main]]
+identifier = "honors"
+name = "Honors"
+url = "/honors/"
+weight = 40
+
+[[menu.main]]
+identifier = "contact"
+name = "Contact"
+url = "/contact/"
+weight = 50
+
+
+[[menu.main]]
+identifier = "cv"
+name = "CV"
+url = "/pdf/Spenser_MC_Tsai_CV_260119.pdf"
+weight = 60
+post = "↗"
+
+  [menu.main.params]
+  target = "_blank"

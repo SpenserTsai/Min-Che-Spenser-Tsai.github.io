@@ -1,0 +1,50 @@
+# 這份說明書的名字
+name: Deploy Hugo site to Pages
+
+on:
+  # 當你把程式碼推送到 main 分支時，觸發自動部署
+  push:
+    branches: ["master"]
+
+  # 允許你手動在 GitHub 點擊按鈕觸發部署
+  workflow_dispatch:
+
+# 設定權限，讓機器人有權力寫入 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 設定任務
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # 這行非常重要！確保 GitHub 能抓到你的主題資料夾
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest' # 使用最新版 Hugo
+          extended: true        # 務必開啟 Extended 版，否則你的高級 CSS 可能會編譯失敗
+
+      - name: Build with Hugo
+        # 執行編譯指令，--gc 是清理舊檔案，--minify 是壓縮檔案大小讓網頁跑更快
+        run: hugo --gc --minify
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

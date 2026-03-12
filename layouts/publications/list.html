@@ -1,0 +1,223 @@
+{{ define "main" }}
+<div class="publications-page">
+
+  <p class="page-home-link"><a href="/">Home</a></p>
+
+  <header class="publications-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+      <p class="publications-description">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="publications-nav">
+    <a href="#journal-articles">Journal Articles</a>
+    <a href="#conference-papers">Conference Papers</a>
+    <a href="#thesis">Thesis</a>
+    
+    {{ with .Params.google_scholar }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="scholar-link scholar-btn">
+        Google Scholar
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="scholar-icon" style="fill: #75A5F0;">
+        <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm0 14L5.5 13.5V17c0 2.76 3.13 5 6.5 5s6.5-2.24 6.5-5v-3.5L12 17z"></path>
+        </svg>
+    </a>
+    {{ end }}
+    
+    {{ with .Params.orcid }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="orcid-link orcid-btn">
+      ORCID
+      <svg viewBox="0 0 256 256" aria-hidden="true" class="orcid-icon" style="fill: #A6CE39;">
+        <path d="M256,128c0,70.69-57.31,128-128,128C57.31,256,0,198.69,0,128C0,57.31,57.31,0,128,0C198.69,0,256,57.31,256,128z"/>
+        <g>
+          <path fill="#FFFFFF" d="M86.3,186.2H70.9V79.1h15.4v48.4V186.2z"/>
+          <path fill="#FFFFFF" d="M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5 c34.1,0,44.8-26.5,44.8-40.6c0-14-10.2-38.3-44.3-38.3h-25V172.4z"/>
+          <path fill="#FFFFFF" d="M88.7,56.7c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1 C84.2,46.5,88.7,51.1,88.7,56.7z"/>
+        </g>
+      </svg>
+    </a>
+    {{ end }}
+  </div>
+
+  {{ $journals := where .RegularPages "Params.pubtype" "journal" }}
+  {{ $conferences := where .RegularPages "Params.pubtype" "conference" }}
+  {{ $theses := where .RegularPages "Params.pubtype" "thesis" }}
+
+  {{ if gt (len $journals) 0 }}
+  <section id="journal-articles" class="pub-section-card">
+    <div class="pub-section-head pub-section-head-flex">
+      <div class="pub-section-head-main">
+        <h2>Journal Articles</h2>
+        <p>Peer-reviewed journal publications.</p>
+      </div>
+      <div class="pub-section-note">* Corresponding author</div>
+    </div>
+
+    <div class="pub-list">
+      {{ range $index, $page := sort (sort $journals "Params.month" "desc") "Params.year" "desc" }}
+      <article class="pub-item">
+        <div class="pub-index">{{ add $index 1 }}.</div>
+        <div class="pub-body">
+          <h3 class="pub-title">{{ $page.Title }}</h3>
+
+          <p class="pub-authors">
+            {{ $authors := .Params.authors }}
+            {{ $authors = replace $authors "Min-Che Tsai" "<strong class='pub-me'><u>Min-Che Tsai</u></strong>" }}
+            {{ with $page.Params.corresponding_author }}
+              {{ $target := . }}
+              {{ if eq $target "Min-Che Tsai" }}
+                {{ $authors = replace $authors "<strong class='pub-me'><u>Min-Che Tsai</u></strong>" "<strong class='pub-me'><u>Min-Che Tsai</u></strong>*" }}
+              {{ else }}
+                {{ $authors = replace $authors $target (printf "%s*" $target) }}
+              {{ end }}
+            {{ end }}
+            {{ $authors | safeHTML }}
+          </p>
+
+          <p class="pub-meta">
+            {{ with $page.Params.venue }}<span class="pub-venue">{{ . }}</span>{{ end }}
+            {{ if or $page.Params.volume $page.Params.number $page.Params.pages }}
+              <span>, </span>
+              {{ with $page.Params.volume }}vol. {{ . }}{{ end }}
+              {{ with $page.Params.number }}({{ . }}){{ end }}
+              {{ with $page.Params.pages }}, pp. {{ . }}{{ end }}
+            {{ end }}
+            {{ with $page.Params.month }}<span>, {{ . }}</span>{{ end }}
+            {{ with $page.Params.year }}<span>, {{ . }}</span>{{ end }}
+
+            {{ if (in $page.Params.top_note "Oral") }}
+              <span class="pub-badge-oral">Oral Presentation</span>
+            {{ end }}
+          </p>
+
+          {{ if (and $page.Params.top_note (not (in $page.Params.top_note "Oral"))) }}
+          <div class="pub-badge-row">
+            <span class="pub-badge-top">{{ $page.Params.top_note }}</span>
+          </div>
+          {{ end }}
+
+          <div class="pub-links">
+            {{ with $page.Params.pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+            {{ with $page.Params.slide }}<a href="{{ . }}" target="_blank" rel="noopener">Slide</a>{{ end }}
+            {{ with $page.Params.doi }}{{ if ne . "" }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>{{ end }}{{ end }}
+            {{ with $page.Params.code }}<a href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+            {{ with $page.Params.video }}<a href="{{ . }}" target="_blank" rel="noopener">Video</a>{{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if gt (len $conferences) 0 }}
+  <section id="conference-papers" class="pub-section-card">
+    <div class="pub-section-head pub-section-head-flex">
+      <div class="pub-section-head-main">
+        <h2>Conference Papers</h2>
+        <p>Refereed conference proceedings.</p>
+      </div>
+      <div class="pub-section-note">* Corresponding author</div>
+    </div>
+
+    <div class="pub-list">
+      {{ range $index, $page := sort (sort $conferences "Params.month" "desc") "Params.year" "desc" }}
+      <article class="pub-item">
+        <div class="pub-index">{{ add $index 1 }}.</div>
+        <div class="pub-body">
+          <h3 class="pub-title">{{ $page.Title }}</h3>
+
+          <p class="pub-authors">
+            {{ $authors := .Params.authors }}
+            {{ $authors = replace $authors "Min-Che Tsai" "<strong class='pub-me'><u>Min-Che Tsai</u></strong>" }}
+            {{ with $page.Params.corresponding_author }}
+              {{ $target := . }}
+              {{ if eq $target "Min-Che Tsai" }}
+                {{ $authors = replace $authors "<strong class='pub-me'><u>Min-Che Tsai</u></strong>" "<strong class='pub-me'><u>Min-Che Tsai</u></strong>*" }}
+              {{ else }}
+                {{ $authors = replace $authors $target (printf "%s*" $target) }}
+              {{ end }}
+            {{ end }}
+            {{ $authors | safeHTML }}
+          </p>
+
+          <p class="pub-meta">
+            {{ with .Params.venue }}<span class="pub-venue">{{ . }}</span>{{ end }}
+            {{ with .Params.pages }}<span>, pp. {{ . }}</span>{{ end }}
+            {{ with .Params.location }}<span>, {{ . }}</span>{{ end }}
+            {{ with .Params.month }}<span>, {{ . }}</span>{{ end }}
+            {{ with .Params.day }}<span> {{ . }}</span>{{ end }}
+            {{ with .Params.year }}<span>, {{ . }}</span>{{ end }}
+
+            {{ if (in $page.Params.top_note "Oral") }}
+              <span class="pub-badge-oral">Oral Presentation</span>
+            {{ end }}
+          </p>
+
+          {{ if (and $page.Params.top_note (not (in $page.Params.top_note "Oral"))) }}
+          <div class="pub-badge-row">
+            <span class="pub-badge-top">{{ $page.Params.top_note }}</span>
+          </div>
+          {{ end }}
+
+          <div class="pub-links">
+            {{ with $page.Params.pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+            {{ with $page.Params.slide }}<a href="{{ . }}" target="_blank" rel="noopener">Slide</a>{{ end }}
+            {{ with $page.Params.doi }}{{ if ne . "" }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>{{ end }}{{ end }}
+            {{ with $page.Params.code }}<a href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+            {{ with $page.Params.video }}<a href="{{ . }}" target="_blank" rel="noopener">Video</a>{{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if gt (len $theses) 0 }}
+  <section id="thesis" class="pub-section-card">
+    <div class="pub-section-head">
+      <h2>Thesis</h2>
+      <p>Graduate research thesis and dissertation.</p>
+    </div>
+
+    <div class="pub-list">
+      {{ range $index, $page := sort (sort $theses "Params.month" "desc") "Params.year" "desc" }}
+      <article class="pub-item">
+        <div class="pub-index">{{ add $index 1 }}.</div>
+        <div class="pub-body">
+          <h3 class="pub-title">{{ $page.Title }}</h3>
+
+          <p class="pub-authors">
+            {{ $authors := .Params.authors }}
+            {{ $authors = replace $authors "Min-Che Tsai" "<strong class='pub-me'><u>Min-Che Tsai</u></strong>" }}
+            {{ $authors | safeHTML }}
+          </p>
+
+          <p class="pub-meta">
+            {{ with $page.Params.venue }}<span class="pub-venue">{{ . }}</span>{{ end }}
+            {{ with $page.Params.publisher }}<span>, {{ . }}</span>{{ end }}
+            {{ with $page.Params.month }}<span>, {{ . }}</span>{{ end }}
+            {{ with $page.Params.year }}<span>, {{ . }}</span>{{ end }}
+          </p>
+
+          {{ with $page.Params.advisor }}
+          <p class="pub-committee"><strong>Advisor:</strong> {{ . }}</p>
+          {{ end }}
+
+          {{ with $page.Params.committee }}
+          <p class="pub-committee"><strong>Committee:</strong> {{ . }}</p>
+          {{ end }}
+
+          <div class="pub-links">
+            {{ with $page.Params.pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

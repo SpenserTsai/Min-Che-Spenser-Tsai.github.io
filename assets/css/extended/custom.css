@@ -1,0 +1,514 @@
+:root {
+    --theme: rgb(247, 247, 249);
+    --entry: rgb(255, 255, 255);
+    --primary: rgb(18, 18, 18);
+    --secondary: rgb(92, 92, 92);
+    --tertiary: rgb(220, 220, 220);
+    --content: rgb(38, 38, 38);
+    --border: rgb(232, 232, 232);
+    --accent: rgb(35, 35, 35);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.78;
+    color: var(--content);
+}
+
+html body, 
+html body.list {
+    background-color: #f1efef; /* 這裡設為白色，若 About 是淺灰則改為 #f8fafc */
+}
+
+.main {
+    max-width: 1180px;
+    padding-top: 12px;
+    background: transparent;
+}
+
+/* Top navigation */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(252, 253, 253, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(220,224,229,0.9);
+}
+
+.nav {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.logo a {
+    font-weight: 580;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color:#9a9aa3
+}
+
+.logo a:hover {
+    color: #b2bad1;
+}
+
+#menu a {
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: #171e3d;
+}
+
+#menu a:hover {
+    color: #89899b;
+}
+
+#menu .active {
+    font-weight: 600;
+}
+
+/* University hero banner */
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 36px;
+    margin-top: 18px;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+}
+
+.hero-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    display: block;
+    transform: scale(1.15);
+}
+
+.hero-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.02),
+            rgba(0, 0, 0, 0.15));
+}
+
+/* Profile card */
+
+.profile-card {
+    position: relative;
+    margin: -96px auto 46px auto;
+    width: calc(100% - 104px);
+    background: rgba(255, 255, 255, 0.978);
+    border: 1px solid rgba(235, 235, 235, 0.96);
+    border-radius: 34px;
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.07),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 56px;
+    backdrop-filter: blur(10px);
+}
+
+.profile-card-left {
+    flex: 0 0 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-frame {
+    width: 190px;
+    height: 220px;
+    border-radius: 30px;
+    border: 5px solid #fff;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    background: #fff;
+}
+
+.profile-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 180%;
+    transform: scale(1.7);
+    transform-origin: center center;
+    display: block;
+}
+
+.profile-card-right {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-label {
+    margin: 0 0 12px 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8c9097;
+}
+
+.profile-card-right h1 {
+    margin: 0 0 14px 0;
+    font-size: 3.05rem;
+    line-height: 1.06;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    color: #102236;
+}
+
+.profile-name-zh {
+    font-size: 0.53em;
+    font-weight: 600;
+    color: #555b63;
+    letter-spacing: 0.04em;
+    margin-left: 12px;
+    vertical-align: baseline;
+}
+
+.profile-title {
+    margin: 0 0 10px 0;
+    font-size: 1.10rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #2c2f33;
+}
+
+.profile-title .university{
+    display: block;
+    margin-top: 5px;
+    font-size: 0.97rem;
+    font-weight: 500;
+    color: #616871;
+}
+
+.profile-tags {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    font-weight: 430;
+    line-height: 1.9;
+    color: #6a7078;
+    letter-spacing: 0.01em;
+    word-spacing: 0.04em;
+}
+
+/* External links */
+
+.profile-socials {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.profile-socials a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.94rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.profile-socials a:hover {
+    color: #22364a;
+}
+
+.social-icon {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    opacity: 0.58;
+}
+
+/* Buttons */
+
+.profile-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.profile-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 17px;
+    border-radius: 999px;
+    border: 1px solid #d6d6d6;
+    background: rgba(255, 255, 255, 0.88);
+    color: #161616;
+    font-weight: 580;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.profile-buttons a:hover {
+    transform: translateY(-1px);
+    background: #ffffff;
+    border-color: #c9c9c9;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Intro card */
+
+.home-intro {
+    margin: 0 auto 40px auto;
+    width: calc(100% - 104px);
+    background: #ffffff;
+    border: 1px solid rgba(230, 230, 230, 0.9);
+    border-radius: 28px;
+    padding: 36px 42px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.home-intro h2 {
+    margin: 0 0 14px 0;
+    font-size: 1.82rem;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+.home-intro p {
+    margin: 0;
+    max-width: 720px;
+    font-size: 1.04rem;
+    line-height: 1.9;
+    color: #484848;
+}
+
+/* Focus Areas */
+
+.focus-areas {
+    width: calc(100% - 104px);
+    margin: 44px auto 70px auto;
+}
+
+.focus-areas h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #1f3650;
+}
+
+.focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.focus-card {
+    background: #fff;
+    border-radius: 28px;
+    padding: 28px;
+    border: 1px solid rgba(220, 224, 229, 0.9);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.02);
+    min-height: 190px;
+    transition:
+        transform 0.35s cubic-bezier(.22, .61, .36, 1),
+        box-shadow 0.35s cubic-bezier(.22, .61, .36, 1);
+}
+
+.focus-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.05),
+        0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.focus-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.18rem;
+    line-height: 1.3;
+    font-weight: 650;
+    color: #171717;
+}
+
+.focus-card p {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.72;
+    color: #626262;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+    .hero-banner {
+        height: 340px;
+        border-radius: 28px;
+    }
+
+    .profile-card,
+    .home-intro,
+    .focus-areas {
+        width: calc(100% - 34px);
+    }
+
+    .profile-card {
+        margin-top: -64px;
+        padding: 32px 26px;
+        gap: 28px;
+    }
+
+    .profile-card-right h1 {
+        font-size: 2.7rem;
+    }
+
+    .home-intro {
+        padding: 28px 26px;
+    }
+}
+
+@media (max-width: 900px) {
+    .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .focus-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 860px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .profile-card-left {
+        flex: none;
+    }
+
+    .profile-card-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-buttons,
+    .profile-socials {
+        justify-content: center;
+    }
+
+    .profile-card-right h1 {
+        font-size: 2.35rem;
+    }
+
+    .profile-tags {
+        max-width: 680px;
+    }
+}
+
+@media (max-width: 640px) {
+    .main {
+        padding-top: 6px;
+    }
+
+    .hero-banner {
+        height: 240px;
+        border-radius: 20px;
+    }
+
+    .profile-card,
+    .home-intro,
+    .focus-areas {
+        width: calc(100% - 18px);
+    }
+
+    .profile-card {
+        margin-top: -46px;
+        padding: 24px 18px;
+        border-radius: 24px;
+    }
+
+    .profile-photo-img {
+        /* 將原先的 180% 改小，例如改為 130% 或更小，具體看你照片裁切的狀況 */
+        /* 數值愈小，照片在框框內就愈往下移 */
+        object-position: center 130%; 
+        
+        /* 如果縮小比例後人顯得太小，可以微調 scale */
+        transform: scale(1.5); 
+    }
+
+    .profile-photo-frame {
+        width: 148px;
+        height: 148px;
+        border-radius: 24px;
+    }
+
+    .profile-card-right h1 {
+        font-size: 1.55rem; /* 縮小到 1.55rem 左右通常可以讓長名字維持一行 */
+        white-space: nowrap; /* 強制不換行 */
+        letter-spacing: -0.01em; /* 稍微縮小字距以節省空間 */
+        display: flex;
+        align-items: baseline;
+        justify-content: center; /* 因為你的手機版是置中對齊 */
+        flex-wrap: wrap; /* 如果名字真的太長，允許中文名字優雅地掉到下一行 */
+        line-height: 1.6; 
+        
+
+    }
+
+    .profile-name-zh {
+        /* 增加與英文名字的間距 */
+        margin-left: 10px; 
+        
+        /* 如果你想讓中文名字更有層次感，可以稍微調低它的垂直對齊 */
+        display: inline-block;
+        transform: translateY(2px);
+        font-size: 0.6em; /* 稍微調整中文大小比例 */
+    }
+
+
+    .profile-tags {
+        font-size: 0.95rem;
+    }
+
+    .profile-buttons a {
+        min-height: 40px;
+        font-size: 0.93rem;
+        padding: 0 16px;
+    }
+
+    .profile-socials {
+        font-size: 0.89rem;
+    }
+
+    .home-intro {
+        padding: 24px 18px;
+        border-radius: 22px;
+    }
+
+    .home-intro h2 {
+        font-size: 1.55rem;
+    }
+
+    .focus-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
