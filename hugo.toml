@@ -13,6 +13,7 @@ pagerSize = 5
 canonifyURLs = true
 relativeURLs = false
 
+staticDir = ['static']
 defaultTheme = "light"
 disableThemeToggle = true
 ShowReadingTime = false
