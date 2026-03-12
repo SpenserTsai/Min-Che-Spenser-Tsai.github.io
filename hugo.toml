@@ -65,7 +65,7 @@ weight = 50
 [[menu.main]]
 identifier = "cv"
 name = "CV"
-url = "/pdf/Spenser_MC_Tsai_CV_260119.pdf"
+url = "/pdf/spenser_mc_Tsai_cv_260119.pdf"
 weight = 60
 post = "↗"
 
